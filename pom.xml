@@ -67,13 +67,6 @@
             -->
 
             <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-bom</artifactId>
-                <version>${version.org.jboss.arquillian.drone}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.jboss.bom</groupId>
                 <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
                 <version>1.0.4.Final</version>
@@ -113,13 +106,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JAX-RS API -->
-        <!--dependency>
-            <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency-->
-
         <!-- IJPA API -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -155,13 +141,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Myfaces CODI (ViewScope, Conversation scope) -->
-        <dependency>
-            <groupId>org.apache.myfaces.extensions.cdi.bundles</groupId>
-            <artifactId>myfaces-extcdi-bundle-jsf20</artifactId>
-            <version>1.0.5</version>
-        </dependency>
-
         <!-- JSF additional libs-->
 
         <!-- http://www.primefaces.org/ -->
@@ -193,31 +172,12 @@
 
         <!-- Now we declare any tools needed -->
 
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-apt</artifactId>
-            <version>2.9.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-jpa</artifactId>
-            <version>2.9.0</version>
-        </dependency>
-
         <!-- Annotation processor that raising compilation errors whenever 
             constraint annotations are incorrectly used. -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- Spring Data for JPA (Repository) -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>1.2.0.RELEASE</version>
         </dependency>
 
         <!-- Apache Shiro security framework -->
@@ -233,12 +193,12 @@
             <version>1.2.1</version>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-core</artifactId>
             <version>5.1.2.FINAL</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency-->
 
         <!-- Servlet 3 API, used to implement CdiEnvironmentLoaderListener for Shiro JpaRealm -->
         <dependency>
@@ -265,6 +225,7 @@
             <version>1.6.1</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
@@ -278,50 +239,8 @@
             <version>2.6</version>
             <scope>provided</scope>
         </dependency>
+        -->
 
-        <!-- Needed for running tests (you may also use TestNG) -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA)
-              JPA from JUnit/TestNG -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-servlet</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- maven dependency resolver for Shrinkwrap -->
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Selenium 2 (WebDriver) dependency chain -->
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-drone-webdriver-depchain</artifactId>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- this seems to be needed to run tests correctly with Drone -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.2.2</version>
-            <scope>test</scope>
-        </dependency>
 
     </dependencies>
 
@@ -354,23 +273,6 @@
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>${jboss.as.plugin.version}</version>
             </plugin>
-            <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>maven-apt-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>target/generated-sources/annotations</outputDirectory>
-                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -393,19 +295,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-
-        <profile>
-            <!-- An optional Arquillian testing profile that executes tests in your JBoss AS instance -->
-            <!-- Run with: mvn clean test -Parq-jbossas-managed -->
-            <id>arq-jbossas-managed</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
         </profile>
 
     </profiles>
