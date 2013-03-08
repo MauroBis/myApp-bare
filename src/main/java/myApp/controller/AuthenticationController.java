@@ -27,8 +27,6 @@ public class AuthenticationController implements Serializable {
 
     static final long serialVersionUID = 8277824266030751108L;
 
-    @Inject FacesContext facesContext;
-
     @Inject @AppLog Logger log;
     @Inject @AppAccessLog AccessLog accessLog;
 

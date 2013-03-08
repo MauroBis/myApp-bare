@@ -1,9 +1,6 @@
 package myApp.security.accesslog;
 
-import myApp.service.AccessLogEntryService;
-
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,11 +10,9 @@ import javax.inject.Inject;
  */
 public class AccessLogFactory {
 
-    @Inject private AccessLogEntryService accessLogEntryService ;
-
     @Produces
     @AppAccessLog
     public AccessLog getAccessLog() {
-        return new DatabaseAccessLog(accessLogEntryService) ;
+        return new LoggerAccessLog() ;
     }
 }

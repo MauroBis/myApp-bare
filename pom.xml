@@ -225,7 +225,6 @@
             <version>1.6.1</version>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
@@ -239,8 +238,6 @@
             <version>2.6</version>
             <scope>provided</scope>
         </dependency>
-        -->
-
 
     </dependencies>
 

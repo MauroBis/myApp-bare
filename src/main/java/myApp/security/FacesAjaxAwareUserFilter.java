@@ -1,15 +1,12 @@
 package myApp.security;
 
-import java.io.IOException;
+import org.apache.shiro.web.filter.authc.PassThruAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.filter.authc.PassThruAuthenticationFilter;
-import org.apache.shiro.web.util.WebUtils;
+import java.io.IOException;
 
 /**
  * allow for Shiro session expiration to work on a Ajax POST

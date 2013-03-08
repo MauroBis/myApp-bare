@@ -2,13 +2,11 @@ package myApp.controller.user;
 
 import myApp.model.user.Role;
 import myApp.model.user.User;
-import myApp.repository.UserConstraintException;
+import myApp.service.UserConstraintException;
 import myApp.service.UserService;
 import myApp.util.AppLog;
-import myApp.util.ResourcesProducer;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DualListModel;
@@ -23,10 +21,12 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 @Named("user_ctrl")
-@ViewAccessScoped
+@SessionScoped
 public class UserController implements Serializable {
 
     private static final long serialVersionUID = -1L;
@@ -35,8 +35,6 @@ public class UserController implements Serializable {
 
     @Inject @AppLog private Logger log;
     @Inject private UserService userService;
-
-    @Inject FacesContext facesContext;
 
     List<User> usersList;
     List<Role> userRoles;
@@ -157,7 +155,7 @@ public class UserController implements Serializable {
 
         if ( rolesPickList.getTarget().size() == 0 ) {
             Messages.addError("users_form:roles", "at_least_one_role");
-            facesContext.validationFailed();
+            Faces.getContext().validationFailed();
             RequestContext.getCurrentInstance().update("user_details");
             return;
         }
@@ -198,7 +196,7 @@ public class UserController implements Serializable {
 
                 }
             }
-            facesContext.validationFailed();
+            Faces.getContext().validationFailed();
             // force ajax update if there is a validation error
             RequestContext.getCurrentInstance().update("user_details");
         }
@@ -207,7 +205,7 @@ public class UserController implements Serializable {
 
     public String getFieldsetHeader() {
 
-        ResourceBundle resourceBundle = facesContext.getApplication().getResourceBundle(facesContext, "msg");
+        ResourceBundle resourceBundle = Faces.getContext().getApplication().getResourceBundle(Faces.getContext(), "msg");
 
         if (selectedUser == null )
             return resourceBundle.getString("user_pages_welcome_fieldset_header") ;

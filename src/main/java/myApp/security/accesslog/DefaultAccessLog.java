@@ -1,14 +1,8 @@
 package myApp.security.accesslog;
 
 import myApp.model.accesslog.AccessLogEntry;
-import myApp.security.accesslog.AccessLog;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 /**
  * Created with IntelliJ IDEA.

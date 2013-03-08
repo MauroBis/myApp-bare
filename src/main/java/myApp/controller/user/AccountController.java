@@ -1,12 +1,12 @@
 package myApp.controller.user;
 
 import myApp.model.user.User;
-import myApp.repository.UserConstraintException;
 import myApp.security.LoggedUser;
+import myApp.service.UserConstraintException;
 import myApp.service.UserService;
 import myApp.util.AppLog;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +23,6 @@ public class AccountController implements Serializable {
 
     private static final long serialVersionUID = -1L;
 
-    @Inject FacesContext facesContext;
     @Inject @AppLog private Logger log;
     @Inject private UserService userService;
     @Inject @LoggedUser private User user;
@@ -46,7 +45,7 @@ public class AccountController implements Serializable {
         if ( user.isForcePasswordChangeOnNextLogin() ) {
             // need to check if password not empty
             if ( ( password == null) || ( password.equals("") ) || ( password.equals("12345678")) ) {
-                facesContext.validationFailed();
+                Faces.getContext().validationFailed();
                 // force ajax update if there is a validation error
                 Messages.addError("users_form:password", "must change password");
                 return ;
@@ -72,7 +71,7 @@ public class AccountController implements Serializable {
                         break;
                 }
             }
-            facesContext.validationFailed();
+            Faces.getContext().validationFailed();
         }
     }
 
