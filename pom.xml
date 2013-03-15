@@ -24,7 +24,7 @@
         <version.org.jboss.arquillian.drone>1.1.1.Final</version.org.jboss.arquillian.drone>
 
         <!-- JBoss dependency versions -->
-        <jboss.as.plugin.version>7.3.Final</jboss.as.plugin.version>
+        <jboss.as.plugin.version>7.4.Final</jboss.as.plugin.version>
 
         <!-- other plugin versions -->
         <compiler.plugin.version>2.3.2</compiler.plugin.version>
