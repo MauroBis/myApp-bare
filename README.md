@@ -1,5 +1,6 @@
 myApp-bare
 ==========
+test
 
 Scheletro per web application che fornisce funzionalità di login e gestione utenti (beta)
 il database è attualmente gestito in RAM tramite H2 (http://www.h2database.com/html/main.html)
